@@ -1,4 +1,4 @@
-import { Home, FileSpreadsheet, BarChart2, Settings, Box } from "lucide-react";
+import { FileSpreadsheet, BarChart2, Settings, Box } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type View = "dashboard" | "reports" | "settings";

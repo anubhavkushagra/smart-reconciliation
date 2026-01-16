@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import Papa from "papaparse";
-import { Upload, FileText, CheckCircle, XCircle } from "lucide-react";
+import { Upload, CheckCircle, XCircle } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -44,7 +44,7 @@ export function FileUpload({ label, onDataLoaded }: FileUploadProps) {
                 }
             },
             error: (err) => {
-                setError(`Parsing error: ${err.message}`);
+                setError(`Parsing error: ${err.message} `);
             },
         });
     };
