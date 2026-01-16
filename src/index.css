@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Open Sans", sans-serif;
+
+  --color-background: #f8f9fa;
+  --color-surface: #ffffff;
+
+  --color-primary: #cb0c9f;
+  --color-primary-hover: #a30a8c;
+
+  --color-secondary: #8392ab;
+  --color-info: #17c1e8;
+  --color-success: #82d616;
+  --color-warning: #fbcf33;
+  --color-error: #ea0606;
+
+  --color-text-main: #344767;
+  --color-text-muted: #67748e;
+
+  --shadow-soft: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
+  --shadow-soft-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-soft-xl: 0 8px 26px -4px hsla(0, 0%, 8%, .15), 0 8px 9px -5px hsla(0, 0%, 8%, .06);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text-main font-sans antialiased;
+  }
+}
+
+/* Soft UI Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 6px;
+  border: 3px solid var(--color-background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
