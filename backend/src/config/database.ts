@@ -7,7 +7,10 @@ export const connectDB = async (): Promise<void> => {
         console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
         console.error('❌ MongoDB connection error:', error);
-        process.exit(1);
+        console.error('❌ MongoDB connection error:', error);
+        // Do NOT exit process in serverless environment
+        // process.exit(1); 
+        throw error; // Re-throw so caller can handle or fail req
     }
 };
 
