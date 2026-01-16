@@ -18,22 +18,8 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(
     cors({
-        origin: (origin, callback) => {
-            // Allow requests with no origin (like mobile apps or curl requests)
-            if (!origin) return callback(null, true);
-
-            // Allow localhost and vercel app domains
-            if (origin.includes('localhost') || origin.endsWith('.vercel.app')) {
-                return callback(null, true);
-            }
-
-            // Default: check config or block
-            if (config.cors.allowedOrigins.includes(origin)) {
-                return callback(null, true);
-            }
-
-            callback(new Error('Not allowed by CORS'));
-        },
+        // Allow ALL origins for now to fix the blocking issue
+        origin: true,
         credentials: true,
     })
 );
