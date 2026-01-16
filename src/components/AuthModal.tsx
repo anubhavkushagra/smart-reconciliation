@@ -146,9 +146,12 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                         </button>
                     </div>
 
-                    <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-center text-xs text-text-muted">
-                        <Server size={12} className="mr-2 opacity-50" />
-                        Connecting to: <code className="ml-1 bg-gray-100 px-1 rounded">{API_URL}</code>
+                    <div className="mt-8 pt-4 border-t border-gray-100 flex flex-col items-center justify-center text-xs text-text-muted">
+                        <div className="flex items-center mb-1">
+                            <Server size={12} className="mr-2 opacity-50" />
+                            Connecting to: <code className="ml-1 bg-gray-100 px-1 rounded">{API_URL}</code>
+                        </div>
+                        <div className="text-[10px] opacity-50">Build: v1.1 (Slash Fix Applied)</div>
                     </div>
                 </motion.div>
             </motion.div>
