@@ -18,7 +18,8 @@
         "sourceMap": true,
         "types": [
             "node"
-        ]
+        ],
+        "composite": true
     },
     "include": [
         "src/**/*"
