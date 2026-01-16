@@ -21,18 +21,18 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         setError("");
 
         if (mode === "signup") {
-            const success = await signup(name, email, password);
-            if (success) {
+            const result = await signup(name, email, password);
+            if (result.success) {
                 onClose();
             } else {
-                setError("User with this email already exists");
+                setError(result.message || "Signup failed");
             }
         } else {
-            const success = await login(email, password);
-            if (success) {
+            const result = await login(email, password);
+            if (result.success) {
                 onClose();
             } else {
-                setError("Invalid email or password");
+                setError(result.message || "Invalid email or password");
             }
         }
     };

@@ -10,8 +10,8 @@ export interface User {
 
 interface AuthContextType {
     user: User | null;
-    login: (email: string, password: string) => Promise<boolean>;
-    signup: (name: string, email: string, password: string) => Promise<boolean>;
+    login: (email: string, password: string) => Promise<{ success: boolean; message?: string }>;
+    signup: (name: string, email: string, password: string) => Promise<{ success: boolean; message?: string }>;
     logout: () => void;
     isAuthenticated: boolean;
     loading: boolean;
@@ -51,7 +51,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         checkAuth();
     }, []);
 
-    const signup = async (name: string, email: string, password: string): Promise<boolean> => {
+    interface AuthResponse {
+        success: boolean;
+        message?: string;
+    }
+
+    const signup = async (name: string, email: string, password: string): Promise<AuthResponse> => {
         setError(null);
         try {
             const response = await authAPI.signup(name, email, password);
@@ -61,17 +66,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem("smart-recon-token", token);
                 localStorage.setItem("smart-recon-user", JSON.stringify(userData));
                 setUser(userData);
-                return true;
+                return { success: true };
             }
-            return false;
+            return { success: false, message: response.message || "Signup failed" };
         } catch (err: any) {
             console.error("Signup error:", err);
-            setError(err.message || "Signup failed");
-            return false;
+            const msg = err.response?.data?.message || err.message || "Signup failed";
+            setError(msg);
+            return { success: false, message: msg };
         }
     };
 
-    const login = async (email: string, password: string): Promise<boolean> => {
+    const login = async (email: string, password: string): Promise<AuthResponse> => {
         setError(null);
         try {
             const response = await authAPI.login(email, password);
@@ -81,13 +87,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 localStorage.setItem("smart-recon-token", token);
                 localStorage.setItem("smart-recon-user", JSON.stringify(userData));
                 setUser(userData);
-                return true;
+                return { success: true };
             }
-            return false;
+            return { success: false, message: response.message || "Login failed" };
         } catch (err: any) {
             console.error("Login error:", err);
-            setError(err.message || "Login failed");
-            return false;
+            const msg = err.response?.data?.message || err.message || "Login failed";
+            setError(msg);
+            return { success: false, message: msg };
         }
     };
 
