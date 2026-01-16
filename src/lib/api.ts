@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosError } from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || ''; // Relative path for Vercel, localhost:5000 for dev (via proxy)
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // Create axios instance
 const api: AxiosInstance = axios.create({
