@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { X, Mail, Lock, User as UserIcon } from "lucide-react";
+import { X, Mail, Lock, User as UserIcon, Server } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { API_URL } from "@/lib/api";
 
 interface AuthModalProps {
     isOpen: boolean;
