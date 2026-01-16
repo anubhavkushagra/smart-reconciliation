@@ -145,6 +145,11 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                             {mode === "login" ? "Sign Up" : "Sign In"}
                         </button>
                     </div>
+
+                    <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-center text-xs text-text-muted">
+                        <Server size={12} className="mr-2 opacity-50" />
+                        Connecting to: <code className="ml-1 bg-gray-100 px-1 rounded">{API_URL}</code>
+                    </div>
                 </motion.div>
             </motion.div>
         </AnimatePresence>
