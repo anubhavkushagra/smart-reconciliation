@@ -2,8 +2,9 @@ import axios from 'axios';
 import type { AxiosInstance, AxiosError } from 'axios';
 
 // Remove trailing slash if present to avoid double slashes
+// Remove trailing slash if present to avoid double slashes
 const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-export const API_URL = envUrl.replace(/\/$/, '');
+export const API_URL = envUrl.replace(/\/+$/, '');
 
 // Create axios instance
 const api: AxiosInstance = axios.create({
