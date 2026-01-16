@@ -16,13 +16,29 @@ connectDB();
 // Middleware
 app.use(helmet());
 app.use(morgan('dev'));
-app.use(
-    cors({
-        // Allow ALL origins for now to fix the blocking issue
-        origin: true,
-        credentials: true,
-    })
-);
+// Brute Force CORS Middleware (Top of stack)
+app.use((req, res, next) => {
+    // Dynamically set origin based on request
+    const origin = req.headers.origin;
+    if (origin) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    } else {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+    // Handle preflight immediately
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
+    next();
+});
+
+// app.use(cors(...)); // standard cors removed for brute force fix
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
