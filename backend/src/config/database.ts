@@ -2,15 +2,20 @@ import mongoose from 'mongoose';
 import { config } from './config.js';
 
 export const connectDB = async (): Promise<void> => {
+    if (!config.mongodb.uri) {
+        console.error('❌ MongoDB URI is missing in environment variables!');
+        return; // Don't crash, just don't connect
+    }
+
     try {
         const conn = await mongoose.connect(config.mongodb.uri);
         console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
-        console.error('❌ MongoDB connection error:', error);
+        // Log but potentially allow server to start (for debugging Vercel 500s)
         console.error('❌ MongoDB connection error:', error);
         // Do NOT exit process in serverless environment
         // process.exit(1); 
-        throw error; // Re-throw so caller can handle or fail req
+        // throw error; 
     }
 };
 
